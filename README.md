@@ -14,7 +14,7 @@ Thats it.
 
 Read a stream a byte at a time until we find an XMP packet header,read the packet, parse it with the Adobe XMP SDK for Java, and create a JSON object (with terrible property names) that keep references to the namespace.
 
-Each of the top level properties becomes a property in the output map.
+Each of the top level properties becomes a property in the output map. 
 
 ## Use
 
