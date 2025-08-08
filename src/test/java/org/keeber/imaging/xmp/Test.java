@@ -3,8 +3,11 @@ package org.keeber.imaging.xmp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -33,6 +36,11 @@ public class Test {
                     print(file.getName());
                     Optional<XMPMap> map = XMPExtractor.extractXMPMap(is);
                     print(map.isPresent()?map.get():"[NO PACKET]");
+                    if (map.isPresent()) {
+                        OutputStream os = new FileOutputStream("./build/"+file.getName()+".json");
+                        os.write(JSON.writerWithDefaultPrettyPrinter().writeValueAsString(map.get()).getBytes(StandardCharsets.UTF_8));
+                        os.close();
+                    }
                 } catch (FileNotFoundException e) {
                     logger.log(Level.SEVERE, null, e);
                 } catch (IOException e) {
